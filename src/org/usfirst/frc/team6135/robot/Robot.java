@@ -18,6 +18,7 @@ import org.usfirst.frc.team6135.robot.misc.ToggleCameraCapture;
 import org.usfirst.frc.team6135.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team6135.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team6135.robot.subsystems.GearShiftSubsystem;
+import org.usfirst.frc.team6135.robot.subsystems.IntakePneumaticsSubsystem;
 import org.usfirst.frc.team6135.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team6135.robot.subsystems.VisionSubsystem;
 import org.usfirst.frc.team6135.robot.subsystems.WristPIDSubsystem;
@@ -51,6 +52,7 @@ public class Robot extends IterativeRobot {
 	public static ElevatorSubsystem elevatorSubsystem;
 	public static WristPIDSubsystem wristSubsystem;
 	public static VisionSubsystem visionSubsystem;
+	public static IntakePneumaticsSubsystem intakePneumaticsSubsystem;
 	
 	public static Alliance color;
 	public static int station; //Starting position of robot
@@ -109,9 +111,9 @@ public class Robot extends IterativeRobot {
 		gearShiftSubsystem = new GearShiftSubsystem();
 		elevatorSubsystem = new ElevatorSubsystem();
 		wristSubsystem = new WristPIDSubsystem();
+		intakePneumaticsSubsystem = new IntakePneumaticsSubsystem();
 		//Already done
 		//RobotMap.wristGyro.calibrate();
-		//wristSubsystem.START_TIME = System.currentTimeMillis();
 		
 		//Get the team's colour and station number
 		station = DriverStation.getInstance().getLocation();

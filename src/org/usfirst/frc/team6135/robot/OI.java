@@ -6,6 +6,7 @@ import org.usfirst.frc.team6135.robot.commands.teleoperated.CancelOperation;
 import org.usfirst.frc.team6135.robot.commands.teleoperated.EmergencySwitch;
 import org.usfirst.frc.team6135.robot.commands.teleoperated.GearShift;
 import org.usfirst.frc.team6135.robot.commands.teleoperated.IntakingPosition;
+import org.usfirst.frc.team6135.robot.commands.teleoperated.OperateIntakePneumatics;
 import org.usfirst.frc.team6135.robot.commands.teleoperated.ResetGyro;
 import org.usfirst.frc.team6135.robot.commands.teleoperated.ScalingPosition;
 import org.usfirst.frc.team6135.robot.commands.teleoperated.SwitchingPosition;
@@ -70,6 +71,8 @@ public class OI {
 	 * 	<li>Right Analog Stick: Tilt Wrist</li>
 	 * 	<li>Left Trigger: Intake Out (Analog)</li>
 	 * 	<li>Right Trigger: Intake In (Analog)</li>
+	 * 	<li>Left Bumper: Intake Open</li>
+	 * 	<li>Right Bumper: Intake Close</li>
 	 * 	<li>X Button: Raise elevator & wrist to place cube in switch position</li>
 	 * 	<li>Y Button: Raise elevator & wrist to shooting position</li>
 	 * 	<li>A Button: Lower elevator & wrist to intaking position</li>
@@ -94,6 +97,8 @@ public class OI {
 		public static final int SHOOTING_POSITION = RobotMap.ControllerMap.BUTTON_Y;
 		public static final int SWITCHING_POSITION = RobotMap.ControllerMap.BUTTON_X;
 		public static final int EMERGENCY = RobotMap.ControllerMap.BUTTON_B;
+		public static final int INTAKE_OPEN = RobotMap.ControllerMap.LBUMPER;
+		public static final int INTAKE_CLOSE = RobotMap.ControllerMap.RBUMPER;
 		//Note: No button is defined here for Gyro Reset since it requires the Start Button,
 		//which has no mapping. An anonymous class extending Trigger is used instead.
 	}
@@ -112,6 +117,7 @@ public class OI {
 	public static JoystickButton shootingPosition;
 	public static JoystickButton intakingPosition;
 	public static JoystickButton switchingPosition;
+	public static JoystickButton intakeOpen, intakeClose;
 	
 	public OI() {
 		//Port 0 is on the right of the programming laptop and port 1 is on the left.
@@ -128,6 +134,8 @@ public class OI {
 		shootingPosition = new JoystickButton(attachmentsController, Controls.SHOOTING_POSITION);
 		intakingPosition = new JoystickButton(attachmentsController, Controls.INTAKING_POSITION);
 		switchingPosition = new JoystickButton(attachmentsController, Controls.SWITCHING_POSITION);
+		intakeOpen = new JoystickButton(attachmentsController, Controls.INTAKE_OPEN);
+		intakeClose = new JoystickButton(attachmentsController, Controls.INTAKE_CLOSE);
 		
 		gearShiftFast.whenPressed(new GearShift(GearShift.GEAR_FAST));
 		gearShiftSlow.whenPressed(new GearShift(GearShift.GEAR_SLOW));
@@ -148,6 +156,8 @@ public class OI {
 		shootingPosition.whenPressed(new ScalingPosition());
 		intakingPosition.whenPressed(new IntakingPosition());
 		switchingPosition.whenPressed(new SwitchingPosition());
+		intakeOpen.whenPressed(new OperateIntakePneumatics(OperateIntakePneumatics.OPEN));
+		intakeClose.whenPressed(new OperateIntakePneumatics(OperateIntakePneumatics.CLOSE));
 		
 		//A trigger has to be used instead since there's no mapping for the start and back buttons
 		Trigger resetGyro = new Trigger() {

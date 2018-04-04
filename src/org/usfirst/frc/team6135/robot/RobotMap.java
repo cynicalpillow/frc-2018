@@ -145,6 +145,7 @@ public class RobotMap {
     public static PIDMotorController rightDrivePIDMotor = new PIDMotorController(rightDriveTalon1);
     
     public static DoubleSolenoid gearshiftSolenoid = new DoubleSolenoid(0, 1);
+    public static DoubleSolenoid intakeSolenoid = new DoubleSolenoid(2, 3);
     
     public static VictorSP elevatorVictor = new VictorSP(7);
     public static VictorSP wristVictor = new VictorSP(8);
@@ -186,5 +187,7 @@ public class RobotMap {
 		
 		intakeRight.setInverted(false);
 		intakeLeft.setInverted(true);
+		
+		intakeSolenoid.set(DoubleSolenoid.Value.kForward);
 	}
 }
